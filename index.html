@@ -16,9 +16,101 @@
     <title>Extending Bootstrap</title>
   </head>
 
-  <body>        
-    <main></main>
-  
+  <body>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
+    <section class="container">
+      <div class="row">
+        <div id="search-div" class="col-12 col-md-4 col-lg-3">
+          <h3>Search for a city:</h3>
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="country-name"
+            aria-label="country-name"
+          />
+
+          <button>Search</button>
+          <hr />
+        </div>
+
+        <div id="main" class="col-12 col-md-8 col-lg-9">
+          <h3>City Name</h3>
+
+          <div class="card-body">
+            <label>Temp:</label>
+            <p id="temp-0"></p>
+            <label>Wind:</label>
+            <p id="wind-0"></p>
+            <label>Humidity:</label>
+            <p id="humidity-0"></p>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <h2>5-Day Forecast:</h2>
+        <div class="weather-content col-12 col-md-6">
+          <div id="weather-0" class="card col-12 col-sm-6 col-lg-4 mb-3">
+            <h3 class="card-header">Day 1</h3>
+            <div class="card-body">
+              <label>Temp:</label>
+              <p id="temp-0"></p>
+              <label>Wind:</label>
+              <p id="wind-0"></p>
+              <label>Humidity:</label>
+              <p id="humidity-0"></p>
+            </div>
+          </div>
+
+          <div id="weather-1" class="card col-12 col-sm-6 col-lg-4 mb-3">
+            <h3 class="card-header">Day 2</h3>
+            <div class="card-body">
+              <label>Temp:</label>
+              <p id="temp-0"></p>
+              <label>Wind:</label>
+              <p id="wind-0"></p>
+              <label>Humidity:</label>
+              <p id="humidity-0"></p>
+            </div>
+          </div>
+          <div id="weather-2" class="card col-12 col-sm-6 col-lg-4 mb-3">
+            <h3 class="card-header">Day 3</h3>
+            <div class="card-body">
+              <label>Temp:</label>
+              <p id="temp-0"></p>
+              <label>Wind:</label>
+              <p id="wind-0"></p>
+              <label>Humidity:</label>
+              <p id="humidity-0"></p>
+            </div>
+          </div>
+          <div id="weather-3" class="card col-12 col-sm-6 col-lg-4 mb-3">
+            <h3 class="card-header">Day 4</h3>
+            <div class="card-body">
+              <label>Temp:</label>
+              <p id="temp-0"></p>
+              <label>Wind:</label>
+              <p id="wind-0"></p>
+              <label>Humidity:</label>
+              <p id="humidity-0"></p>
+            </div>
+          </div>
+          <div id="weather-4" class="card col-12 col-sm-6 col-lg-4 mb-3">
+            <h3 class="card-header">Day 5</h3>
+            <div class="card-body">
+              <label>Temp:</label>
+              <p id="temp-0"></p>
+              <label>Wind:</label>
+              <p id="wind-0"></p>
+              <label>Humidity:</label>
+              <p id="humidity-0"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
   </body>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

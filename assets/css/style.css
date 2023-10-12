@@ -1,1 +1,30 @@
 
+header {
+  padding: 20px;
+  margin: 20px;
+  text-align:center;
+  background: #7c54c5;
+  color: #fff;
+}
+
+#search-div {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+#main {
+  border: 1px solid rgb(11, 11, 11);
+}
+
+.weather-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.card {
+  margin-right: 20px;
+}
+
