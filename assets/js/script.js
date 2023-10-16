@@ -78,14 +78,22 @@ function fillCurrentDetails(data) {
   currentDateEl.text(data.name + " (" + unixFormat + ")");
 
   var currentTempEl = $("#temp-current");
-  currentTempEl.text(data.main.temp);
+  currentTempEl.text(data.main.temp + " °F");
 
   var currentWindEl = $("#wind-current");
-  currentWindEl.text(data.wind.speed);
+  currentWindEl.text(data.wind.speed +" MPH");
 
   var currentHumidityEl = $("#humidity-current");
-  currentHumidityEl.text(data.main.humidity);
-}
+  currentHumidityEl.text(data.main.humidity + "%");
+
+  var currentWeatherIconCode = data.weather[0].icon;
+
+  // Create an image element to display the weather icon
+    var weatherIconUrl = `https://openweathermap.org/img/w/${currentWeatherIconCode}.png`;
+    var weatherIcon = $("<img>").attr("src", weatherIconUrl);
+  $("#currentWeatherIconContainer").append(weatherIcon);
+  }
+
 
 function callFiveDayForecastApiAndFillData(lat, lon) {
   var requestUrl =
@@ -108,14 +116,26 @@ function fillForecastDetails(data) {
     dateEl.text(unixFormat);
 
     var tempEl = $("#temp-" + i);
-    tempEl.text(forecastList[i * 8 - 1].main.temp);
+    tempEl.text(forecastList[i * 8 - 1].main.temp + " °F");
 
     var windEl = $("#wind-" + i);
-    windEl.text(forecastList[i * 8 - 1].wind.speed);
+    windEl.text(forecastList[i * 8 - 1].wind.speed +" MPH");
 
     var humidityEl = $("#humidity-" + i);
-    humidityEl.text(forecastList[i * 8 - 1].main.humidity);
+    humidityEl.text(forecastList[i * 8 - 1].main.humidity + "%");
+
+    var weatherIconCode = forecastList[i * 8 - 1].weather[0].icon;
+
+  // Construct the URL for the weather icon image
+    var weatherIconUrl = `https://openweathermap.org/img/w/${weatherIconCode}.png`;
+
+  // Create an image element to display the weather icon
+    var weatherIcon = $("<img>").attr("src", weatherIconUrl);
+
+  // Append the weather icon to a specific HTML element
+  $("#weatherIconContainer-" + i).append(weatherIcon);
   }
+  
 }
 
 // ---------------------
