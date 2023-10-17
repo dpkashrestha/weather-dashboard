@@ -24,95 +24,102 @@
       <div class="row">
         <div id="search-div" class="col-12 col-md-4 col-lg-3">
           <h3>Search for a city:</h3>
-          
+
           <form id="city-form">
-            <input type="text" class="form-input w-100 mb-3" id="city-input" name="city-input" placeholder="Enter city name" />
+            <input
+              type="text"
+              class="form-input w-100 mb-3"
+              id="city-input"
+              name="city-input"
+              placeholder="Enter city name"
+            />
             <button id="citySearchBtn" class="btn btn-info">Search</button>
           </form>
-          <hr/>
+          <hr />
           <ul id="city-list"></ul>
         </div>
 
-        <div id="main" class="col-12 col-md-8 col-lg-9">
-          <h3 id="current-city-header"></h3>
-           <div id="currentWeatherIconContainer"></div>
-          <div class="card-body">
-            <label>Temp:</label>
-            <p id="temp-current"></p>
-            <label>Wind:</label>
-            <p id="wind-current"></p>
-            <label>Humidity:</label>
-            <p id="humidity-current"></p>
-          </div>
+        <div class="col-12 col-md-8 col-lg-9">
+          <section id="main">
+            <h3 id="current-city-header"></h3>
+            <div id="currentWeatherIconContainer"></div>
+            <div class="card-body">
+              <label>Temp:</label>
+              <p id="temp-current"></p>
+              <label>Wind:</label>
+              <p id="wind-current"></p>
+              <label>Humidity:</label>
+              <p id="humidity-current"></p>
+            </div>
+          </section>
+          <section>
+            <h2>5-Day Forecast:</h2>
+            <div class="weather-content col-12 col-md-6">
+              <div id="weather-1" class="card col-12 col-sm-6 col-lg-4 mb-3">
+                <h5 id="date-1" class="card-header"></h5>
+                <div id="weatherIconContainer-1"></div>
+                <div class="card-body">
+                  <label>Temp:</label>
+                  <p id="temp-1"></p>
+                  <label>Wind:</label>
+                  <p id="wind-1"></p>
+                  <label>Humidity:</label>
+                  <p id="humidity-1"></p>
+                </div>
+              </div>
+    
+              <div id="weather-2" class="card col-12 col-sm-6 col-lg-4 mb-3">
+                <h5 id="date-2" class="card-header"></h5>
+                <div id="weatherIconContainer-2"></div>
+                <div class="card-body">
+                  <label>Temp:</label>
+                  <p id="temp-2"></p>
+                  <label>Wind:</label>
+                  <p id="wind-2"></p>
+                  <label>Humidity:</label>
+                  <p id="humidity-2"></p>
+                </div>
+              </div>
+              <div id="weather-3" class="card col-12 col-sm-6 col-lg-4 mb-3">
+                <h5 id="date-3" class="card-header"></h5>
+                <div id="weatherIconContainer-3"></div>
+                <div class="card-body">
+                  <label>Temp:</label>
+                  <p id="temp-3"></p>
+                  <label>Wind:</label>
+                  <p id="wind-3"></p>
+                  <label>Humidity:</label>
+                  <p id="humidity-3"></p>
+                </div>
+              </div>
+              <div id="weather-4" class="card col-12 col-sm-6 col-lg-4 mb-3">
+                <h5 id="date-4" class="card-header"></h5>
+                <div id="weatherIconContainer-4"></div>
+                <div class="card-body">
+                  <label>Temp:</label>
+                  <p id="temp-4"></p>
+                  <label>Wind:</label>
+                  <p id="wind-4"></p>
+                  <label>Humidity:</label>
+                  <p id="humidity-4"></p>
+                </div>
+              </div>
+              <div id="weather-5" class="card col-12 col-sm-6 col-lg-4 mb-3">
+                <h5 id="date-5" class="card-header"></h5>
+                <div id="weatherIconContainer-5"></div>
+                <div class="card-body">
+                  <label>Temp:</label>
+                  <p id="temp-5"></p>
+                  <label>Wind:</label>
+                  <p id="wind-5"></p>
+                  <label>Humidity:</label>
+                  <p id="humidity-5"></p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
-
-      <section>
-        <h2>5-Day Forecast:</h2>
-        <div class="weather-content col-12 col-md-6">
-          <div id="weather-1" class="card col-12 col-sm-6 col-lg-4 mb-3">
-            <h5 id="date-1" class="card-header"></h5>
-            <div id="weatherIconContainer-1"></div>
-            <div class="card-body">
-              <label>Temp:</label>
-              <p id="temp-1"></p>
-              <label>Wind:</label>
-              <p id="wind-1"></p>
-              <label>Humidity:</label>
-              <p id="humidity-1"></p>
-            </div>
-          </div>
-
-          <div id="weather-2" class="card col-12 col-sm-6 col-lg-4 mb-3">
-            <h5 id="date-2" class="card-header"></h5>
-            <div id="weatherIconContainer-2"></div>
-            <div class="card-body">
-              <label>Temp:</label>
-              <p id="temp-2"></p>
-              <label>Wind:</label>
-              <p id="wind-2"></p>
-              <label>Humidity:</label>
-              <p id="humidity-2"></p>
-            </div>
-          </div>
-          <div id="weather-3" class="card col-12 col-sm-6 col-lg-4 mb-3">
-            <h5 id="date-3" class="card-header"></h5>
-            <div id="weatherIconContainer-3"></div>
-            <div class="card-body">
-              <label>Temp:</label>
-              <p id="temp-3"></p>
-              <label>Wind:</label>
-              <p id="wind-3"></p>
-              <label>Humidity:</label>
-              <p id="humidity-3"></p>
-            </div>
-          </div>
-          <div id="weather-4" class="card col-12 col-sm-6 col-lg-4 mb-3">
-            <h5 id="date-4" class="card-header"></h5>
-            <div id="weatherIconContainer-4"></div>
-            <div class="card-body">
-              <label>Temp:</label>
-              <p id="temp-4"></p>
-              <label>Wind:</label>
-              <p id="wind-4"></p>
-              <label>Humidity:</label>
-              <p id="humidity-4"></p>
-            </div>
-          </div>
-          <div id="weather-5" class="card col-12 col-sm-6 col-lg-4 mb-3">
-            <h5 id="date-5" class="card-header"></h5>
-            <div id="weatherIconContainer-5"></div>
-            <div class="card-body">
-              <label>Temp:</label>
-              <p id="temp-5"></p>
-              <label>Wind:</label>
-              <p id="wind-5"></p>
-              <label>Humidity:</label>
-              <p id="humidity-5"></p>
-            </div>
-          </div>
-        </div>
-      </section>
     </section>
   </body>
   <script

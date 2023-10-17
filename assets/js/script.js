@@ -19,7 +19,7 @@ function cityHistoryAction(event) {
 
 function createCityButton(city) {
   var cityListItemEl = $(
-    '<li class="history-item flex-row justify-space-between align-center p-2 bg-light text-dark">'
+    '<li class="history-item justify-space-between align-center p-2 text-dark">'
   );
   cityListItemEl.text(city);
 
@@ -129,8 +129,6 @@ function fillForecastDetails(data) {
     $(`#weatherIconContainer-${i}`).append(weatherIcon);
   }
 }
-
-// ---------------------
 
 var cityFormEl = $("#city-form");
 var cityListEl = $("#city-list");

@@ -3,19 +3,30 @@ header {
   padding: 20px;
   margin: 20px;
   text-align:center;
-  background: #7c54c5;
+  background: #54a7c5;
   color: #fff;
+}
+
+.card-header{
+  min-height: 40px;
+  border-radius:5px;
+  background: #54a7c5;
+}
+
+#current-city-header{
+  min-height: 40px;
+  background: #54a7c5; 
 }
 
 #search-div {
   display:flex;
   flex-direction: column;
-  justify-content: space-between;
   text-align: left;
 }
 
 #main {
   border: 1px solid rgb(11, 11, 11);
+  background: rgb(222, 216, 216);
 }
 
 .weather-content {
@@ -26,10 +37,24 @@ header {
 
 .card {
   margin-right: 20px;
+  background: rgb(222, 216, 216);
 }
 
 #citySearchBtn {
-  background-color:#7c54c5;
+  background-color:#54a7c5;
+  border-radius:5px;
+  width: 100%;
+
+}
+
+.history-item {
+  border: black 1px solid;
+  border-radius:5px;
+  background-color:#54a7c5;
+  width:100%;
+  margin-bottom: 15px;
+  text-align: center;
+
 }
 
 #city-list {
