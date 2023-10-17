@@ -32,3 +32,6 @@ header {
   background-color:#7c54c5;
 }
 
+#city-list {
+  list-style-type: none;
+}

@@ -1,4 +1,5 @@
 var cityNames = [];
+var apiKey = "0f63a7591d270b5b58541ae9ebe1c960";
 
 function initializePage() {
   cityNames = JSON.parse(localStorage.getItem("cityNames"));
@@ -13,7 +14,6 @@ function initializePage() {
 
 function cityHistoryAction(event) {
   var liClicked = $(event.target);
-  console.log(liClicked.text());
   populateWeatherDetails(liClicked.text());
 }
 
@@ -23,54 +23,40 @@ function createCityButton(city) {
   );
   cityListItemEl.text(city);
 
-
   cityListEl.append(cityListItemEl);
 }
 
 function populateWeatherDetails(city) {
-  callGeoCodingApi(city);
-
-  if (!cityNames.includes(city)) {
-    cityNames.push(city);
-    localStorage.setItem("cityNames", JSON.stringify(cityNames));
-  }
+  callCurrentWeatherApiAndFillData(city);
+  callFiveDayForecastApiAndFillData(city);
+  
 }
 
-function callGeoCodingApi(city) {
-  var requestUrl =
-    "https://api.openweathermap.org/geo/1.0/direct?q=Saint%20Paul,MN,US&limit=5&appid=0f63a7591d270b5b58541ae9ebe1c960";
+function callCurrentWeatherApiAndFillData(city) {
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      var lat = data[0].lat;
-      var lon = data[0].lon;
+      if (data.cod == 404) {
+        alert("Error: " + data.message);
+        return;
+      }
 
-      callCurrentWeatherApiAndFillData(lat, lon);
-      callFiveDayForecastApiAndFillData(lat, lon);
-    });
-}
-
-function callCurrentWeatherApiAndFillData(lat, lon) {
-  var requestUrl =
-    "https://api.openweathermap.org/data/2.5/weather?lat=" +
-    lat +
-    "&lon=" +
-    lon +
-    "&units=imperial&appid=0f63a7591d270b5b58541ae9ebe1c960";
-
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
       fillCurrentDetails(data);
+
+      if (!cityNames.includes(city)) {
+        createCityButton(city);
+        cityNames.push(city);
+        localStorage.setItem("cityNames", JSON.stringify(cityNames));
+      }
     });
 }
 
 function fillCurrentDetails(data) {
+  console.log("fillCurrent:" + data);
   var currentDate = data.dt;
   var currentDateEl = $("#current-city-header");
 
@@ -78,10 +64,10 @@ function fillCurrentDetails(data) {
   currentDateEl.text(data.name + " (" + unixFormat + ")");
 
   var currentTempEl = $("#temp-current");
-  currentTempEl.text(data.main.temp + " °F");
+  currentTempEl.text(data.main.temp + "°F");
 
   var currentWindEl = $("#wind-current");
-  currentWindEl.text(data.wind.speed +" MPH");
+  currentWindEl.text(data.wind.speed + " MPH");
 
   var currentHumidityEl = $("#humidity-current");
   currentHumidityEl.text(data.main.humidity + "%");
@@ -89,20 +75,24 @@ function fillCurrentDetails(data) {
   var currentWeatherIconCode = data.weather[0].icon;
 
   // Create an image element to display the weather icon
-    var weatherIconUrl = `https://openweathermap.org/img/w/${currentWeatherIconCode}.png`;
-    var weatherIcon = $("<img>").attr("src", weatherIconUrl);
+  $('#currentWeatherIconContainer img:first').remove();
+
+  var weatherIconUrl = `https://openweathermap.org/img/w/${currentWeatherIconCode}.png`;
+  var weatherIcon = $("<img>").attr("src", weatherIconUrl);
   $("#currentWeatherIconContainer").append(weatherIcon);
-  }
+}
 
-
-function callFiveDayForecastApiAndFillData(lat, lon) {
+function callFiveDayForecastApiAndFillData(city) {
   var requestUrl =
-    "https://api.openweathermap.org/data/2.5/forecast?lat=44.9497487&lon=-93.0931028&units=imperial&appid=0f63a7591d270b5b58541ae9ebe1c960";
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
+      if (data.cod == 404) {
+        return;
+      }
       fillForecastDetails(data);
     });
 }
@@ -116,26 +106,28 @@ function fillForecastDetails(data) {
     dateEl.text(unixFormat);
 
     var tempEl = $("#temp-" + i);
-    tempEl.text(forecastList[i * 8 - 1].main.temp + " °F");
+    tempEl.text(forecastList[i * 8 - 1].main.temp + "°F");
 
     var windEl = $("#wind-" + i);
-    windEl.text(forecastList[i * 8 - 1].wind.speed +" MPH");
+    windEl.text(forecastList[i * 8 - 1].wind.speed + " MPH");
 
     var humidityEl = $("#humidity-" + i);
     humidityEl.text(forecastList[i * 8 - 1].main.humidity + "%");
 
     var weatherIconCode = forecastList[i * 8 - 1].weather[0].icon;
 
-  // Construct the URL for the weather icon image
+    
+    $(`#weatherIconContainer-${i} img:first`).remove();
+
+    // Construct the URL for the weather icon image
     var weatherIconUrl = `https://openweathermap.org/img/w/${weatherIconCode}.png`;
 
-  // Create an image element to display the weather icon
+    // Create an image element to display the weather icon
     var weatherIcon = $("<img>").attr("src", weatherIconUrl);
 
-  // Append the weather icon to a specific HTML element
-  $("#weatherIconContainer-" + i).append(weatherIcon);
+    // Append the weather icon to a specific HTML element
+    $(`#weatherIconContainer-${i}`).append(weatherIcon);
   }
-  
 }
 
 // ---------------------
@@ -149,18 +141,16 @@ function handleFormSubmit(event) {
   var cityItem = $('input[name="city-input"]').val();
 
   if (!cityItem) {
-    console.log("No city item filled out in form!");
+    alert("No city item filled out in form!");
     return;
   }
 
-  createCityButton(cityItem);
+  
   // clear the form input element
   $('input[name="city-input"]').val("");
 
   populateWeatherDetails(cityItem);
 }
-
-
 
 // use event delegation on the `cityListEl` to listen for click on any element with a class of `history-item`
 cityListEl.on("click", ".history-item", cityHistoryAction);
