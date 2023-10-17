@@ -1,6 +1,7 @@
 var cityNames = [];
-var apiKey = "0f63a7591d270b5b58541ae9ebe1c960";
+var apiKey = "0f63a7591d270b5b58541ae9ebe1c960"; // openweather api key
 
+// on page load function
 function initializePage() {
   cityNames = JSON.parse(localStorage.getItem("cityNames"));
   if (!cityNames) {
@@ -26,12 +27,13 @@ function createCityButton(city) {
   cityListEl.append(cityListItemEl);
 }
 
+// main function to call the apis and load weather data to the screen
 function populateWeatherDetails(city) {
   callCurrentWeatherApiAndFillData(city);
   callFiveDayForecastApiAndFillData(city);
-  
 }
 
+// Current Weather
 function callCurrentWeatherApiAndFillData(city) {
   var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 
@@ -82,6 +84,7 @@ function fillCurrentDetails(data) {
   $("#currentWeatherIconContainer").append(weatherIcon);
 }
 
+// Five day forecast
 function callFiveDayForecastApiAndFillData(city) {
   var requestUrl =
     `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
@@ -99,6 +102,14 @@ function callFiveDayForecastApiAndFillData(city) {
 
 function fillForecastDetails(data) {
   var forecastList = data.list;
+
+/*
+  Five day forcast api returns weather data for every 3 hours for every day. So, 8 elements per
+  day which totals to 40 elements for 5 days. 
+
+  So we loop through 5 times and get the 8th, 16th, 24th, 32nd & 40th element by using
+  [i * 8 -1] index.
+*/
   for (var i = 1; i <= 5; i++) {
     var dateEl = $("#date-" + i);
 
@@ -143,7 +154,6 @@ function handleFormSubmit(event) {
     return;
   }
 
-  
   // clear the form input element
   $('input[name="city-input"]').val("");
 
